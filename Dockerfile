@@ -126,7 +126,6 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=5 \
 EXPOSE 80
 ENTRYPOINT ["/web-init.sh"]
 
-
 ######################
 
 FROM mppbocabase AS mppbocajail
@@ -145,37 +144,26 @@ RUN apt-get -y update \
         lsb-release \
         schroot
 
-# https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/2019908
-COPY boca/tools/boca-createjail /var/www/boca/tools/
 COPY boca/tools/safeexec.c /var/www/boca/tools/
+COPY --chmod=755 jail-create.sh /var/www/boca/tools/
 
 WORKDIR /var/www/boca
 RUN \
     # install-bocaautojudge
     # https://github.com/cassiopc/boca/blob/master/Makefile
-    mkdir -p /usr/sbin/ /usr/bin/ /etc/ \
-    && gcc tools/safeexec.c -o tools/safeexec \
+    gcc tools/safeexec.c -o tools/safeexec \
     && install tools/safeexec /usr/bin/safeexec \
-    && install tools/boca-createjail /usr/sbin/boca-createjail \
     && install tools/boca-autojudge.sh /usr/sbin/boca-autojudge \
     && chmod 4555 /usr/bin/safeexec \
-    && chmod 700 /usr/sbin/boca-createjail \
-    && chmod 700 /usr/sbin/boca-autojudge
-    # boca-autojudge.postinst
-    # https://github.com/cassiopc/boca/blob/master/debian/boca-autojudge.postinst
-    # Done before
-    # && chmod 4555 /usr/bin/safeexec \
-    # && chmod 700 /usr/sbin/boca-createjail \
-    # && chmod 700 /usr/sbin/boca-autojudge
+    && chmod 700 /usr/sbin/boca-autojudge \
+    && /var/www/boca/tools/jail-create.sh
 
-RUN boca-createjail
+COPY --chmod=755 jail-init.sh /var/www/boca/tools/
+COPY --chmod=755 jail-populate.sh /var/www/boca/tools/
 
-COPY --chmod=755 jail-init.sh /
+RUN --security=insecure /var/www/boca/tools/jail-populate.sh
 
-# Add HEALTHCHECK instruction to the container image
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=5 \
     CMD ps ax | grep -v grep | grep php | grep autojudging.php > /dev/null || exit 1
 
-# Use exec format to run program directly as pid 1
-# https://www.padok.fr/en/blog/docker-processes-container
-ENTRYPOINT ["/jail-init.sh"]
+ENTRYPOINT ["/var/www/boca/tools/jail-init.sh"]

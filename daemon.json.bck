@@ -1,0 +1,7 @@
+{
+  "builder": {
+    "entitlements": {
+      "security.insecure": true
+    }
+  }
+}

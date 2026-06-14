@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# 
+#
 # This program is released under license GNU GPL v3+ license.
 #
 #========================================================================
@@ -76,9 +76,9 @@ done
 
 >&2 echo "PostgreSQL server is up - executing command"
 
-if [ ! -d /home/bocajail/bin ]; then
-    echo "Creating BOCA jail environment..."
-    boca-createjail
+if [ ! -f /home/bocajail/populate.sh ]; then
+    echo "Populating BOCA jail environment with dev packages..."
+    /var/www/boca/tools/jail-populate.sh
 fi
 
 # Use exec format to run program directly as pid 1

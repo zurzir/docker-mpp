@@ -38,7 +38,11 @@ services:
       context: .
       dockerfile: Dockerfile
       target: mppbocajail
+      entitlements:
+        - security.insecure
     privileged: true
+    cap_add:
+      - ALL
     environment:
       - BOCA_DB_SUPER_PASSWORD=superpass
     depends_on:
