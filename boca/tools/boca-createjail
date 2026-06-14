@@ -118,8 +118,6 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 /usr/sbin/locale-gen
 /usr/sbin/update-locale
 
-echo 'deb http://archive.ubuntu.com/ubuntu/ noble main restricted universe multiverse' >> /etc/apt/sources.list.d/noble.sources
-
 apt-get -y update
 apt-get -y install software-properties-common
 add-apt-repository -y ppa:icpc-latam/maratona-linux
@@ -132,7 +130,7 @@ apt-get -y clean
 EOF
 mkdir -p /bocajail/usr/bin
 [ -x /usr/bin/safeexec ] && cp -a /usr/bin/safeexec /bocajail/usr/bin/
-cp -f /etc/apt/sources.list $homejail/etc/apt/
+cp -f /etc/apt/sources.list.d/* $homejail/etc/apt/sources.list.d/
 chmod 755 /home/bocajail/tmp/populate.sh
 
 export LC_ALL=en_US.UTF-8
