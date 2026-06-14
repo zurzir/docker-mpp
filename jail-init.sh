@@ -76,9 +76,9 @@ done
 
 >&2 echo "PostgreSQL server is up - executing command"
 
-if [ ! -f /home/bocajail/populate.sh ]; then
-    echo "Populating BOCA jail environment with dev packages..."
-    /var/www/boca/tools/jail-populate.sh
+if [ ! -f /home/bocajail/java.sh ]; then
+    echo "Populating BOCA jail environment with java packages..."
+    /var/www/boca/tools/jail-java.sh
 fi
 
 # Use exec format to run program directly as pid 1

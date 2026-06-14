@@ -159,9 +159,7 @@ RUN \
     && /var/www/boca/tools/jail-create.sh
 
 COPY --chmod=755 jail-init.sh /var/www/boca/tools/
-COPY --chmod=755 jail-populate.sh /var/www/boca/tools/
-
-RUN --security=insecure /var/www/boca/tools/jail-populate.sh
+COPY --chmod=755 jail-java.sh /var/www/boca/tools/
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=5 \
     CMD ps ax | grep -v grep | grep php | grep autojudging.php > /dev/null || exit 1
