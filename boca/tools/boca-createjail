@@ -111,7 +111,7 @@ fi
 echo "*** Populating $homejail"
 cat <<EOF > /home/bocajail/tmp/populate.sh
 #!/bin/bash
-mount -t proc proc /proc
+# mount -t proc proc /proc
 
 echo "LC_ALL=en_US.UTF-8" > /etc/default/locale
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
@@ -128,7 +128,7 @@ apt-get -y upgrade
 apt-get -y install maratona-linguagens file --no-install-recommends --allow-unauthenticated
 apt-get -y clean
 
-umount /proc
+# umount /proc
 EOF
 mkdir -p /bocajail/usr/bin
 [ -x /usr/bin/safeexec ] && cp -a /usr/bin/safeexec /bocajail/usr/bin/
