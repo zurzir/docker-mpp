@@ -11,6 +11,7 @@ services:
       - PHP_UPLOAD_MAX_FILESIZE=100M
       - PHP_POST_MAX_SIZE=100M
       - PHP_MEMORY_LIMIT=512M
+      - TZ=America/Sao_Paulo
     depends_on:
       boca-db:
         condition: service_healthy
@@ -43,6 +44,7 @@ services:
       - ALL
     environment:
       - BOCA_DB_SUPER_PASSWORD=superpass
+      - TZ=America/Sao_Paulo
     depends_on:
       boca-db:
         condition: service_healthy
@@ -52,6 +54,8 @@ services:
     image: postgres:14-alpine
     environment:
       - POSTGRES_PASSWORD=superpass
+      - TZ=America/Sao_Paulo
+      - PGTZ=America/Sao_Paulo
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
