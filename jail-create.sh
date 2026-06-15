@@ -44,7 +44,7 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 # apt-get -y clean
 
 apt-get -y update
-apt-get -y install build-essential
+apt-get -y install build-essential python3 pypy3 python-is-python3
 apt-get -y clean
 
 EOF
