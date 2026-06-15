@@ -36,11 +36,15 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 /usr/sbin/locale-gen
 /usr/sbin/update-locale
 
+# apt-get -y update
+# apt-get -y install software-properties-common
+# add-apt-repository -y ppa:icpc-latam/maratona-linux
+# apt-get -y update
+# apt-get -y install maratona-linguagens file --no-install-recommends --allow-unauthenticated
+# apt-get -y clean
+
 apt-get -y update
-apt-get -y install software-properties-common
-add-apt-repository -y ppa:icpc-latam/maratona-linux
-apt-get -y update
-apt-get -y install maratona-linguagens file --no-install-recommends --allow-unauthenticated
+apt-get -y install build-essential
 apt-get -y clean
 
 EOF
