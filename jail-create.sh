@@ -44,7 +44,8 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 # apt-get -y clean
 
 apt-get -y update
-apt-get -y install build-essential python3 pypy3 python-is-python3
+# lista todos os pacotes de maratona-linguagens, ao invés de adicionar ppa
+apt-get -y install build-essential debconf openjdk-21-jdk gdb python3 pypy3 python-is-python3 pyflakes3 pylint python3-setuptools unzip wget valgrind
 apt-get -y clean
 
 EOF
