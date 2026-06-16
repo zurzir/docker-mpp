@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# 
+#
 # This program is released under license GNU GPL v3+ license.
 #
 #========================================================================
@@ -69,7 +69,7 @@ PHP_POST_MAX_SIZE="${PHP_POST_MAX_SIZE:-100M}"
 PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-256M}"
 
 echo "Configuring PHP: upload_max_filesize=$PHP_UPLOAD_MAX_FILESIZE, post_max_size=$PHP_POST_MAX_SIZE, memory_limit=$PHP_MEMORY_LIMIT"
-for ini in /etc/php/8.1/apache2/conf.d/99-boca-limits.ini /etc/php/8.1/cli/conf.d/99-boca-limits.ini; do
+for ini in /etc/php/8.3/apache2/conf.d/99-boca-limits.ini /etc/php/8.3/cli/conf.d/99-boca-limits.ini; do
     if [ -f "$ini" ]; then
         echo "upload_max_filesize = $PHP_UPLOAD_MAX_FILESIZE" > "$ini"
         echo "post_max_size = $PHP_POST_MAX_SIZE" >> "$ini"
@@ -83,7 +83,7 @@ do
   >&2 echo "PostgreSQL server is unavailable - sleeping"
   sleep 1
 done
-  
+
 >&2 echo "PostgreSQL server is up - executing command"
 
 # https://stackoverflow.com/questions/14549270/check-if-database-exists-in-postgresql-using-shell
