@@ -8,8 +8,8 @@ services:
       target: mppbocaweb
     environment:
       - BOCA_DB_SUPER_PASSWORD=superpass
-      - PHP_UPLOAD_MAX_FILESIZE=100M
-      - PHP_POST_MAX_SIZE=100M
+      - PHP_UPLOAD_MAX_FILESIZE=300M
+      - PHP_POST_MAX_SIZE=300M
       - PHP_MEMORY_LIMIT=512M
       - TZ=America/Sao_Paulo
     depends_on:
